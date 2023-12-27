@@ -12,37 +12,41 @@ public class StudentRepository {
     HashMap<String,Teacher> teacherHashMap=new HashMap<>();
 
     HashMap<Teacher, List<Student>> studentTeacherPair=new HashMap<>();
+    public StudentRepository(){
+
+    }
     public void addStudent(Student student){
-        studentHashmap.put(student.getName(), student);
+        this.studentHashmap.put(student.getName(), student);
 
     }
     public void addTeacher( Teacher teacher){
-        teacherHashMap.put(teacher.getName(), teacher);
+        this.teacherHashMap.put(teacher.getName(), teacher);
     }
 
     public void addStudentTeacherPair(String student,String teacher){
-        Student student1=studentHashmap.get(student);
-        Teacher temp=teacherHashMap.get(teacher);
-        if(studentTeacherPair.containsKey(temp)){
-            studentTeacherPair.get(temp).add(student1);
+        Student student1=this.studentHashmap.get(student);
+        Teacher temp=this.teacherHashMap.get(teacher);
+        if(this.studentTeacherPair.containsKey(temp)){
+            this.studentTeacherPair.get(temp).add(student1);
         }
         else {
             List<Student> studentList=new ArrayList<>();
             studentList.add(student1);
-            studentTeacherPair.put(temp,studentList);
+            this.studentTeacherPair.put(temp,studentList);
 
         }
     }
     public Student getStudentByName(String name){
-        return studentHashmap.get(name);
+        return this.studentHashmap.get(name);
+
 
     }
     public Teacher getTeacherByName(String name){
 
-        return teacherHashMap.get(name);
+        return this.teacherHashMap.get(name);
     }
     public List<String> getStudentsByTeacherName(String teacher){
-         List<Student> temp= studentTeacherPair.get(teacherHashMap.get(teacher));
+         List<Student> temp= this.studentTeacherPair.get(this.teacherHashMap.get(teacher));
         List<String> ans=new ArrayList<>();
         for(Student i:temp){
             ans.add(i.getName());
@@ -52,15 +56,15 @@ public class StudentRepository {
 
     }
     public HashMap<String,Student> getAllStudents(){
-        return studentHashmap;
+        return this.studentHashmap;
     }
     public void deleteTeacherByName(String teacher){
-        teacherHashMap.remove(teacher);
-        studentTeacherPair.remove(teacherHashMap.get(teacher));
+        this.teacherHashMap.remove(teacher);
+        this.studentTeacherPair.remove(this.teacherHashMap.get(teacher));
 
     }
     public void deleteAllTeachers(){
-        teacherHashMap.clear();
-        studentTeacherPair.clear();
+        this.teacherHashMap.clear();
+        this.studentTeacherPair.clear();
     }
 }

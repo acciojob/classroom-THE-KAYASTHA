@@ -11,13 +11,16 @@ import java.util.List;
 public class StudentService {
     StudentRepository repoObj=new StudentRepository();
 
+    public StudentService(){
+
+    }
         public void addStudent(Student student){
-            repoObj.addStudent(student);
+            this.repoObj.addStudent(student);
 
 
         }
         public void addTeacher( Teacher teacher){
-            repoObj.addTeacher(teacher);
+            this.repoObj.addTeacher(teacher);
 
 
         }
@@ -26,21 +29,21 @@ public class StudentService {
         }
 
         public Student getStudentByName(String name){
-            Student studentObj=repoObj.getStudentByName(name);
+            Student studentObj=this.repoObj.getStudentByName(name);
 
             return studentObj;
         }
         public Teacher getTeacherByName(String name){
-            Teacher teacherObj=repoObj.getTeacherByName(name);
+            Teacher teacherObj=this.repoObj.getTeacherByName(name);
             return teacherObj;
         }
         public List<String> getStudentsByTeacherName(String teacher){
-            List<String> listObj=repoObj.getStudentsByTeacherName(teacher);
+            List<String> listObj=this.repoObj.getStudentsByTeacherName(teacher);
              return listObj;
 
         }
         public List<String> getAllStudents(){
-            HashMap<String,Student> hmap=repoObj.getAllStudents();
+            HashMap<String,Student> hmap=this.repoObj.getAllStudents();
             List<String> allStudent=new ArrayList<>();
 
             for(String name: hmap.keySet()){
@@ -50,10 +53,10 @@ public class StudentService {
 
         }
         public void deleteTeacherByName(String teacher){
-            repoObj.deleteTeacherByName(teacher);
+            this.repoObj.deleteTeacherByName(teacher);
         }
         public void deleteAllTeachers(){
-            repoObj.deleteAllTeachers();
+            this.repoObj.deleteAllTeachers();
         }
 
 

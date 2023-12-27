@@ -24,60 +24,63 @@ public class StudentController {
 
 
         StudentService serviceObj=new StudentService();
+        public StudentController(){
+
+        }
     @PostMapping("/add-student")
     public ResponseEntity<String> addStudent(@RequestBody Student student){
-        serviceObj.addStudent(student);
+        this.serviceObj.addStudent(student);
         return new ResponseEntity<>("New student added successfully", HttpStatus.CREATED);
     }
 
     @PostMapping("/add-teacher")
     public ResponseEntity<String> addTeacher(@RequestBody Teacher teacher){
-        serviceObj.addTeacher(teacher);
+        this.serviceObj.addTeacher(teacher);
         return new ResponseEntity<>("New teacher added successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/add-student-teacher-pair")
     public ResponseEntity<String> addStudentTeacherPair(@RequestParam String student, @RequestParam String teacher){
-        serviceObj.addStudentTeacherPair(student,teacher);
+        this.serviceObj.addStudentTeacherPair(student,teacher);
         return new ResponseEntity<>("New student-teacher pair added successfully", HttpStatus.CREATED);
     }
 
     @GetMapping("/get-student-by-name/{name}")
     public ResponseEntity<Student> getStudentByName(@PathVariable String name){
-        Student student = serviceObj.getStudentByName(name); // Assign student by calling service layer method
+        Student student = this.serviceObj.getStudentByName(name); // Assign student by calling service layer method
 
         return new ResponseEntity<>(student, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-teacher-by-name/{name}")
     public ResponseEntity<Teacher> getTeacherByName(@PathVariable String name){
-        Teacher teacher = serviceObj.getTeacherByName(name); // Assign student by calling service layer method
+        Teacher teacher = this.serviceObj.getTeacherByName(name); // Assign student by calling service layer method
 
         return new ResponseEntity<>(teacher, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-students-by-teacher-name/{teacher}")
     public ResponseEntity<List<String>> getStudentsByTeacherName(@PathVariable String teacher){
-        List<String> students =  serviceObj.getStudentsByTeacherName(teacher); // Assign list of student by calling service layer method
+        List<String> students =  this.serviceObj.getStudentsByTeacherName(teacher); // Assign list of student by calling service layer method
 
         return new ResponseEntity<>(students, HttpStatus.CREATED);
     }
 
     @GetMapping("/get-all-students")
     public ResponseEntity<List<String>> getAllStudents(){
-        List<String> students = serviceObj.getAllStudents(); // Assign list of student by calling service layer method
+        List<String> students = this.serviceObj.getAllStudents(); // Assign list of student by calling service layer method
 
         return new ResponseEntity<>(students, HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete-teacher-by-name")
     public ResponseEntity<String> deleteTeacherByName(@RequestParam String teacher){
-            serviceObj.deleteTeacherByName(teacher);
+            this.serviceObj.deleteTeacherByName(teacher);
         return new ResponseEntity<>(teacher + " removed successfully", HttpStatus.CREATED);
     }
     @DeleteMapping("/delete-all-teachers")
     public ResponseEntity<String> deleteAllTeachers(){
-        serviceObj.deleteAllTeachers();
+        this.serviceObj.deleteAllTeachers();
         return new ResponseEntity<>("All teachers deleted successfully", HttpStatus.CREATED);
     }
 }
