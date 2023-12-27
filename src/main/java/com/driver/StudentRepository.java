@@ -59,19 +59,27 @@ public class StudentRepository {
         return this.studentHashmap;
     }
     public void deleteTeacherByName(String teacher){
-        this.teacherHashMap.remove(teacher);
+
+        List<Student> temp=this.studentTeacherPair.get(this.teacherHashMap.get(teacher));
+        for(Student str:temp){
+
+            this.studentHashmap.remove(str.getName());
+
+        }
+
         this.studentTeacherPair.remove(this.teacherHashMap.get(teacher));
+        this.teacherHashMap.remove(teacher);
 
     }
     public void deleteAllTeachers(){
         this.teacherHashMap.clear();
-        for(Teacher i:studentTeacherPair.keySet()){
+        for(Teacher i:this.studentTeacherPair.keySet()){
 
-                List<Student> temp=studentTeacherPair.get(i);
+                List<Student> temp=this.studentTeacherPair.get(i);
 
              for(Student str:temp){
 
-                studentHashmap.remove(str.getName());
+                this.studentHashmap.remove(str.getName());
 
             }
         }
