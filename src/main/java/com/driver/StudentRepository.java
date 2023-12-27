@@ -11,7 +11,7 @@ public class StudentRepository {
     HashMap<String,Student> studentHashmap=new HashMap<>();
     HashMap<String,Teacher> teacherHashMap=new HashMap<>();
 
-    HashMap<String, List<String>> studentTeacherPair=new HashMap<>();
+    HashMap<Teacher, List<Student>> studentTeacherPair=new HashMap<>();
     public void addStudent(Student student){
         studentHashmap.put(student.getName(), student);
 
@@ -21,13 +21,15 @@ public class StudentRepository {
     }
 
     public void addStudentTeacherPair(String student,String teacher){
-        if(studentTeacherPair.containsKey(teacher)){
-            studentTeacherPair.get(teacher).add(student);
+        Student student1=studentHashmap.get(student);
+        Teacher temp=teacherHashMap.get(teacher);
+        if(studentTeacherPair.containsKey(temp)){
+            studentTeacherPair.get(temp).add(student1);
         }
         else {
-            List<String> studentList=new ArrayList<>();
-            studentList.add(student);
-            studentTeacherPair.put(teacher,studentList);
+            List<Student> studentList=new ArrayList<>();
+            studentList.add(student1);
+            studentTeacherPair.put(temp,studentList);
 
         }
     }
@@ -40,7 +42,13 @@ public class StudentRepository {
         return teacherHashMap.get(name);
     }
     public List<String> getStudentsByTeacherName(String teacher){
-        return studentTeacherPair.get(teacher);
+         List<Student> temp= studentTeacherPair.get(teacherHashMap.get(teacher));
+        List<String> ans=new ArrayList<>();
+        for(Student i:temp){
+            ans.add(i.getName());
+        }
+        return ans;
+
 
     }
     public HashMap<String,Student> getAllStudents(){
@@ -48,7 +56,7 @@ public class StudentRepository {
     }
     public void deleteTeacherByName(String teacher){
         teacherHashMap.remove(teacher);
-        studentTeacherPair.remove(teacher);
+        studentTeacherPair.remove(teacherHashMap.get(teacher));
 
     }
     public void deleteAllTeachers(){
