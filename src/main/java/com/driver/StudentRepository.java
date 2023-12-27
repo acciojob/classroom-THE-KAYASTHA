@@ -65,6 +65,16 @@ public class StudentRepository {
     }
     public void deleteAllTeachers(){
         this.teacherHashMap.clear();
+        for(Teacher i:studentTeacherPair.keySet()){
+
+                List<Student> temp=studentTeacherPair.get(i);
+
+             for(Student str:temp){
+
+                studentHashmap.remove(str.getName());
+
+            }
+        }
         this.studentTeacherPair.clear();
     }
 }
